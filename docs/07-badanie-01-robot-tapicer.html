@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Badanie nr 1 – Robot tapicer – protokół badawczy</title>
+<style>
+  @page { size: A4; margin: 20mm 18mm 20mm 18mm; }
+  @page :first { margin: 0; }
+  :root { --forest:#0E3B2E; --navy:#0F1E3A; --amber:#D18A2F; --amber-ink:#8A5510; --cream:#FBF8F1; --tint:#EEF3EE; --ink:#14211C; --muted:#4E5D56; --line:#D4DAD2; }
+  * { box-sizing: border-box; }
+  body { margin:0; font: 10.2pt/1.5 "Lato", "Segoe UI", "Helvetica Neue", Arial, sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .cover { height: 297mm; padding: 38mm 22mm 20mm; background: linear-gradient(165deg, var(--forest) 0%, var(--navy) 100%); color:#fff; display:flex; flex-direction:column; page-break-after: always; }
+  .cover .eyebrow { letter-spacing:.16em; text-transform:uppercase; font-size:8.5pt; color:#A9CDBB; }
+  .cover h1 { font-size: 40pt; line-height:1.05; margin: 10mm 0 6mm; font-weight:800; }
+  .cover h1 span { display:block; font-size: 15pt; font-weight:600; color: var(--amber); letter-spacing:.12em; text-transform:uppercase; margin-bottom:5mm; }
+  .cover .sub { font-size: 13pt; max-width: 130mm; color:#E3ECE6; }
+  .cover .meta { margin-top:auto; font-size:9pt; color:#C4D2CA; border-top:1px solid rgba(255,255,255,.25); padding-top:5mm; display:grid; grid-template-columns: 1fr 1fr; gap:2mm 10mm; }
+  .cover .meta b { color:#fff; font-weight:700; }
+  h2 { font-size: 16pt; color: var(--forest); margin: 9mm 0 3mm; line-height:1.2; page-break-after: avoid; break-inside: avoid; display: flow-root; }
+  h2 .n { color: var(--amber-ink); font-size: 9pt; letter-spacing:.14em; display:block; margin-bottom:1mm; }
+  h3 { font-size: 11.5pt; color: var(--forest); margin: 5mm 0 2mm; page-break-after: avoid; }
+  p { margin: 0 0 2.5mm; }
+  ul, ol { margin: 0 0 3mm; padding-left: 5mm; }
+  li { margin-bottom: 1mm; }
+  table { width:100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 9.2pt; page-break-inside: avoid; }
+  th { background: var(--forest); color:#fff; text-align:left; padding: 2mm 2.5mm; font-weight:700; vertical-align: top; }
+  td { padding: 2mm 2.5mm; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:nth-child(even) td { background: #F6F7F3; }
+  .box { background: var(--tint); border-left: 3px solid var(--forest); padding: 4mm 5mm; margin: 3mm 0 4mm; page-break-inside: avoid; }
+  .box.warn { background:#FAF1E2; border-color: var(--amber); }
+  .box h3 { margin-top:0; }
+  .box p:last-child, .box ul:last-child { margin-bottom:0; }
+  .small { font-size: 8.6pt; color: var(--muted); }
+  .sign td { height: 14mm; }
+  a { color: var(--forest); word-break: break-all; }
+  .tag { font-weight:700; color: var(--amber-ink); }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="eyebrow">Fernhunt Baltic AI · Program Physical AI dla rzemiosła</div>
+  <h1><span>Badanie nr 1 · Protokół</span>Robot tapicer</h1>
+  <p class="sub">Wykonalność uczenia robota podstawowych czynności tapicerskich z demonstracji: rozłożenie, wygładzenie i zawinięcie tkaniny na panelu próbnym.</p>
+  <div class="meta">
+    <div><b>Wersja:</b> 1.0, projekt do zatwierdzenia</div>
+    <div><b>Data:</b> 11 listopada 2026</div>
+    <div><b>Typ dokumentu:</b> protokół badania wykonalności (TRL 2 → 3)</div>
+    <div><b>Status:</b> przed rozpoczęciem, bez zakupów i nagrań</div>
+    <div><b>Projekt docelowy:</b> robot wykonujący pracę tapicera</div>
+    <div><b>Poufność:</b> materiał wewnętrzny</div>
+  </div>
+</section>
+
+<h2><span class="n">00</span>Streszczenie</h2>
+<p><b>Cel docelowy programu:</b> robot, który samodzielnie obija tkaniną element mebla tapicerowanego z jakością akceptowaną przez mistrza tapicera.</p>
+<p><b>Cel Badania nr 1:</b> sprawdzić na małym, bezpiecznym stanowisku, czy robot nauczony z demonstracji człowieka potrafi wykonać trzy najprostsze czynności na tkaninie, oraz zmierzyć, ile kosztuje zebranie jednej użytecznej demonstracji.</p>
+<div class="box">
+  <h3>Co to badanie rozstrzyga</h3>
+  <ul>
+    <li>Czy tani zestaw leader–follower i uczenie przez naśladowanie radzą sobie z materiałem odkształcalnym w wąskim zadaniu.</li>
+    <li>Które etapy pracy tapicera nadają się do automatyzacji w pierwszej kolejności, według oceny mistrza zawodu.</li>
+    <li>Jaki jest realny czas i koszt jednej zaakceptowanej demonstracji.</li>
+    <li>Czy kontynuować program (GO), zmienić zadanie lub sprzęt (PIVOT), czy go zatrzymać (STOP).</li>
+  </ul>
+</div>
+<div class="box warn">
+  <h3>Czego to badanie nie rozstrzyga</h3>
+  <p>Nie powstanie robot tapicer ani jego prototyp. Badanie nie obejmuje naciągu tkaniny z kontrolą siły, zszywania, narożników, pianki, kleju ani pracy na prawdziwym meblu. Wynik pozytywny oznacza tylko, że warto sfinansować kolejny etap.</p>
+</div>
+<table>
+  <tr><th style="width:32%">Parametr</th><th>Wartość</th></tr>
+  <tr><td>Czas trwania</td><td>6 tygodni od zatwierdzenia protokołu</td></tr>
+  <tr><td>Sprzęt</td><td>Para ramion leader–follower klasy SO-101, 2 kamery, stanowisko stołowe</td></tr>
+  <tr><td>Liczba demonstracji</td><td>60 zaakceptowanych na zadanie, do 180 łącznie</td></tr>
+  <tr><td>Liczba prób testowych</td><td>30 na zadanie i warunek, do 270 łącznie</td></tr>
+  <tr><td>Budżet gotówkowy</td><td>2 400–7 250 zł plus wynagrodzenie tapicera (do ustalenia)</td></tr>
+  <tr><td>Wynik</td><td>Raport z badania, zbiór danych, mapa automatyzowalności, decyzja GO / PIVOT / STOP</td></tr>
+</table>
+
+<h2><span class="n">01</span>Kontekst i uzasadnienie</h2>
+<p>Tapicerstwo jest w kompendium Fernhunt ocenione jako zawód o wysokiej złożoności pilotażu, ponieważ tkanina jest materiałem odkształcalnym: rozciąga się, marszczy i za każdym razem układa inaczej. Dlatego Badanie nr 1 nie zaczyna od mebla, tylko od pytania, czy w ogóle potrafimy nauczyć robota panowania nad kawałkiem tkaniny.</p>
+<h3>Stan rynku i badań</h3>
+<ul>
+  <li><b>Automatyzacja przemysłowa już istnieje dla wąskich przypadków.</b> W czerwcu 2026 r. integrator Dvolu opisał celę z robotem Fanuc M-710iC i wizją maszynową, która dla kanadyjskiego producenta mebli naciąga, zszywa i przycina obicie poduszek siedziskowych. To komunikat firmy, bez niezależnej weryfikacji wyników.</li>
+  <li><b>Badania nad manipulacją tkaniną raportują umiarkowaną skuteczność.</b> Prace nad składaniem tkanin i odzieży podają skuteczność od ok. 67% do 100% w zależności od zadania, a jedna z nich 75% w warunkach rzeczywistych po zebraniu ok. 15 tys. trajektorii. Dotyczą innych robotów i innych zadań niż tapicerowanie.</li>
+  <li><b>Nie znaleziono recenzowanych publikacji o robotyzacji tapicerowania.</b> Przegląd był krótki (dwa zapytania), więc to wniosek wstępny.</li>
+</ul>
+<div class="box">
+  <h3>Hipoteza pozycjonująca (niepotwierdzona)</h3>
+  <p>Cela przemysłowa opłaca się przy jednym typie wyrobu w dużej serii. Możliwą niszą jest krótka seria i zmienny asortyment, gdzie robot uczy się nowego wzoru z kilkudziesięciu demonstracji mistrza zamiast z programowania. Tę hipotezę trzeba sprawdzić w rozmowach z producentami mebli, równolegle do badania.</p>
+</div>
+
+<h2><span class="n">02</span>Droga do celu docelowego</h2>
+<p>Badanie nr 1 jest pierwszym z sześciu etapów. Kosztów etapów 2–6 nie szacowano, bo zależą od wyniku etapu 1 i wyboru robota.</p>
+<table>
+  <tr><th style="width:8%">Etap</th><th style="width:30%">Zakres</th><th style="width:30%">Sprzęt</th><th>Warunek wejścia</th></tr>
+  <tr><td>1</td><td><b>Badanie nr 1:</b> rozłożenie, wygładzenie, zawinięcie krawędzi na panelu próbnym</td><td>Jedno ramię klasy SO-101, mocowanie na rzep</td><td>Zatwierdzony protokół, bramka G1</td></tr>
+  <tr><td>2</td><td>Naciąg tkaniny dwiema rękami z pomiarem siły</td><td>Dwa ramiona, czujnik siły lub prądu serw</td><td>GO z etapu 1</td></tr>
+  <tr><td>3</td><td>Mocowanie trwałe (zszywki) w osłoniętej celi</td><td>Cobot z narzędziem, osłony, analiza BHP i wymagań maszynowych</td><td>Wynik etapu 2, partner przemysłowy</td></tr>
+  <tr><td>4</td><td>Narożniki, krzywizny, dopasowanie wzoru</td><td>Jak w etapie 3</td><td>Powtarzalny wynik etapu 3</td></tr>
+  <tr><td>5</td><td>Pełny panel siedziska, porównanie czasu i jakości z człowiekiem</td><td>Stanowisko zbliżone do produkcyjnego</td><td>Płatny pilotaż lub partner B+R</td></tr>
+  <tr><td>6</td><td>Pilotaż w zakładzie tapicerskim</td><td>Stanowisko u klienta</td><td>Umowa z zakładem, ocena ryzyka</td></tr>
+</table>
+<p class="small">Uczciwa skala: droga od etapu 1 do 6 to program wieloletni wymagający robota klasy przemysłowej. Ramię SO-101 nie ma udźwigu ani siły potrzebnych do naciągu i zszywania.</p>
+
+<h2><span class="n">03</span>Pytania badawcze i hipotezy</h2>
+<table>
+  <tr><th style="width:8%">Nr</th><th>Pytanie badawcze</th></tr>
+  <tr><td>P1</td><td>Z jaką skutecznością polityka nauczona z 50 demonstracji wykonuje każde z trzech zadań na tkaninie znanej z treningu?</td></tr>
+  <tr><td>P2</td><td>O ile spada skuteczność na tkaninie i ułożeniu początkowym, których robot nie widział?</td></tr>
+  <tr><td>P3</td><td>Ile minut pracy i ile złotych kosztuje jedna zaakceptowana demonstracja?</td></tr>
+  <tr><td>P4</td><td>Które etapy rzeczywistej pracy tapicera mistrz ocenia jako możliwe do automatyzacji, a które jako wymagające człowieka?</td></tr>
+  <tr><td>P5</td><td>Jakie są najczęstsze typy porażek robota i czy wynikają z danych, modelu czy sprzętu?</td></tr>
+</table>
+<table>
+  <tr><th style="width:8%">Nr</th><th>Hipoteza</th><th style="width:26%">Próg potwierdzenia</th></tr>
+  <tr><td>H1</td><td>Robot rozkłada tkaninę na panelu (zadanie Z1) na tkaninie treningowej</td><td>skuteczność ≥ 70%</td></tr>
+  <tr><td>H2</td><td>Robot usuwa fałdę przez pociągnięcie krawędzi (Z2)</td><td>skuteczność ≥ 50%</td></tr>
+  <tr><td>H3</td><td>Robot zawija krawędź i mocuje ją na rzep (Z3)</td><td>skuteczność ≥ 40%</td></tr>
+  <tr><td>H4</td><td>Na nowej tkaninie skuteczność Z1 spada umiarkowanie</td><td>spadek ≤ 20 pkt proc.</td></tr>
+</table>
+<p class="small">Progi są propozycją roboczą autora protokołu. Zespół zatwierdza je lub zmienia <b>przed</b> pierwszym nagraniem i nie zmienia po obejrzeniu wyników.</p>
+
+<h2><span class="n">04</span>Zakres</h2>
+<table>
+  <tr><th style="width:50%">W zakresie</th><th>Poza zakresem</th></tr>
+  <tr>
+    <td><ul><li>panel próbny 12 × 12 cm z pianką</li><li>próbki tkaniny 20 × 20 cm</li><li>mocowanie na rzep lub magnesy</li><li>jedno ramię wykonawcze i uchwyt pasywny</li><li>teleoperacja przez ramię leader</li><li>obserwacja i wywiad z tapicerem przy prawdziwej pracy</li></ul></td>
+    <td><ul><li>zszywacz, klej, nożyce, igły</li><li>skóra naturalna i ekoskóra</li><li>naciąg z kontrolą siły</li><li>narożniki i krzywizny</li><li>prawdziwy mebel</li><li>praca robota bez nadzoru</li></ul></td>
+  </tr>
+</table>
+
+<h2><span class="n">05</span>Metoda</h2>
+<h3>Część A: analiza pracy mistrza (tydzień 1–2)</h3>
+<ul>
+  <li>Udział: 1–2 tapicerów z doświadczeniem zawodowym, na podstawie pisemnej umowy.</li>
+  <li>Nagranie 10 pełnych wykonań obicia prostego panelu siedziska prawdziwymi narzędziami, dwie kamery, komentarz głosowy mistrza.</li>
+  <li>Rozbicie pracy na etapy, pomiar czasu każdego etapu, spis kryteriów dobrej jakości i typowych błędów.</li>
+  <li>Ocena każdego etapu przez mistrza w skali 1–5: trudność, ryzyko dla jakości, chęć oddania maszynie.</li>
+</ul>
+<p><b>Wynik części A:</b> ontologia etapów tapicerowania i mapa automatyzowalności. Nagrania wideo z części A nie służą do sterowania robotem.</p>
+
+<h3>Część B: eksperyment robotyczny (tydzień 2–6)</h3>
+<table>
+  <tr><th style="width:8%">Nr</th><th style="width:22%">Zadanie</th><th>Przebieg</th><th style="width:32%">Kryterium sukcesu próby</th></tr>
+  <tr><td>Z1</td><td>Rozłożenie</td><td>Robot podnosi próbkę z pola startowego i kładzie ją na panelu</td><td>Panel zakryty w całości, zapas ≥ 2 cm z każdej strony, w czasie ≤ 60 s</td></tr>
+  <tr><td>Z2</td><td>Wygładzenie</td><td>Na panelu leży próbka z jedną fałdą, robot ciągnie za krawędź</td><td>Brak fałdy na licu w ocenie dwóch oceniających, tkanina nadal zakrywa panel</td></tr>
+  <tr><td>Z3</td><td>Zawinięcie krawędzi</td><td>Robot zawija jedną krawędź na bok panelu i dociska do rzepu</td><td>Krawędź trzyma na ≥ 90% długości, lico bez zmarszczek przy krawędzi</td></tr>
+</table>
+<p>Zadania realizowane są kolejno. Z2 i Z3 rozpoczyna się tylko wtedy, gdy Z1 osiągnie co najmniej 50% w teście wstępnym na 10 próbach. W przeciwnym razie zespół analizuje przyczyny i badanie kończy się na Z1.</p>
+
+<h3>Warunki testowe</h3>
+<table>
+  <tr><th style="width:14%">Warunek</th><th>Opis</th><th style="width:22%">Prób na zadanie</th></tr>
+  <tr><td>W1</td><td>Tkanina treningowa, ułożenie startowe z zakresu treningowego</td><td>30</td></tr>
+  <tr><td>W2</td><td>Tkanina treningowa, ułożenie startowe spoza zakresu (obrót i przesunięcie)</td><td>30</td></tr>
+  <tr><td>W3</td><td>Tkanina nowa (inny splot i kolor), ułożenie z zakresu treningowego</td><td>30</td></tr>
+</table>
+
+<h3>Uczenie</h3>
+<ul>
+  <li>Narzędzia: biblioteka LeRobot, polityka ACT jako punkt odniesienia. Opcjonalnie drugi model dla porównania, jeśli starczy czasu.</li>
+  <li>Podział: 50 demonstracji do treningu, 10 do walidacji, na każde zadanie.</li>
+  <li>Każdy trening zapisany z wersją danych, konfiguracją i ziarnem losowym.</li>
+</ul>
+
+<h2><span class="n">06</span>Specyfikacja danych</h2>
+<table>
+  <tr><th style="width:30%">Element</th><th>Wymaganie</th></tr>
+  <tr><td>Format</td><td>Zbiór danych zgodny z LeRobot, jeden epizod na jedną demonstrację</td></tr>
+  <tr><td>Obraz</td><td>2 kamery (z góry i z nadgarstka), 640 × 480, 30 kl./s, stałe położenie i oświetlenie</td></tr>
+  <tr><td>Stan i akcja</td><td>Pozycje przegubów ramienia follower (stan) i leader (akcja), zsynchronizowane z obrazem</td></tr>
+  <tr><td>Metadane epizodu</td><td>Zadanie, tkanina, operator, data, wynik, czas, uwagi, wersja stanowiska</td></tr>
+  <tr><td>Kontrola jakości</td><td>Epizod odrzucany, gdy: zadanie nieukończone, kolizja, przerwa w zapisie, zasłonięta kamera</td></tr>
+  <tr><td>Ewidencja czasu</td><td>Czas przygotowania, nagrania i przeglądu każdej sesji, potrzebny do P3</td></tr>
+  <tr><td>Prawa</td><td>Każdy epizod powiązany z umową operatora lub mistrza. Bez umowy epizod nie wchodzi do zbioru</td></tr>
+</table>
+
+<h2><span class="n">07</span>Pomiar i analiza</h2>
+<ul>
+  <li><b>Miara główna:</b> odsetek udanych prób na zadanie i warunek, z 95-procentowym przedziałem ufności Wilsona.</li>
+  <li><b>Miary dodatkowe:</b> czas wykonania, liczba interwencji człowieka, ocena jakości przez tapicera w skali 1–5 na 10 losowych próbach każdego zadania.</li>
+  <li><b>Katalog porażek:</b> każda nieudana próba przypisana do jednej kategorii: chwyt, pozycjonowanie, fałda, mocowanie, sprzęt, inne.</li>
+  <li><b>Ekonomika danych:</b> minuty i koszt na jedną zaakceptowaną demonstrację, odsetek odrzuconych epizodów.</li>
+  <li><b>Ocena sukcesu:</b> dwóch niezależnych oceniających na podstawie nagrania. Rozbieżności rozstrzyga tapicer.</li>
+</ul>
+<div class="box warn">
+  <h3>Ograniczenie statystyczne</h3>
+  <p>Przy 30 próbach wynik 18 z 30 (60%) ma przedział ufności ok. 42–75%. Badanie pozwala odróżnić „działa często” od „działa rzadko”, ale nie pozwala porównywać wyników różniących się o kilka punktów procentowych.</p>
+</div>
+
+<h2><span class="n">08</span>Kryteria decyzji</h2>
+<table>
+  <tr><th style="width:14%">Decyzja</th><th>Warunek</th><th style="width:34%">Następny krok</th></tr>
+  <tr><td><b>GO</b></td><td>H1 potwierdzona oraz co najmniej jedna z H2, H3, a tapicer ocenia jakość udanych prób średnio na ≥ 3 z 5</td><td>Projekt etapu 2 (dwa ramiona, pomiar siły) i rozmowy z producentami mebli</td></tr>
+  <tr><td><b>PIVOT</b></td><td>H1 potwierdzona, H2 i H3 odrzucone albo główną przyczyną porażek jest sprzęt</td><td>Zmiana chwytaka lub przejście na dwa ramiona przed kolejnym zadaniem</td></tr>
+  <tr><td><b>STOP</b></td><td>H1 odrzucona mimo 60 demonstracji i poprawnych danych</td><td>Raport z wnioskami, wstrzymanie kierunku tapicerskiego</td></tr>
+</table>
+
+<h2><span class="n">09</span>Harmonogram</h2>
+<table>
+  <tr><th style="width:14%">Tydzień</th><th>Działania</th><th style="width:30%">Rezultat</th></tr>
+  <tr><td>0</td><td>Zatwierdzenie protokołu i progów, umowa z tapicerem, zamówienie sprzętu</td><td>Podpisany protokół</td></tr>
+  <tr><td>1</td><td>Część A: nagrania i wywiad z mistrzem. Montaż i kalibracja ramion</td><td>Nagrania, działające stanowisko</td></tr>
+  <tr><td>2</td><td>Ontologia etapów. 5 próbnych demonstracji Z1, test całego toru danych</td><td>Mapa automatyzowalności</td></tr>
+  <tr><td>3</td><td>60 demonstracji Z1, trening, test wstępny na 10 próbach</td><td>Decyzja o Z2 i Z3</td></tr>
+  <tr><td>4</td><td>Demonstracje Z2 i Z3, treningi</td><td>Zbiór danych v1</td></tr>
+  <tr><td>5</td><td>Testy we wszystkich warunkach, ocena tapicera</td><td>Surowe wyniki</td></tr>
+  <tr><td>6</td><td>Analiza, katalog porażek, raport, decyzja</td><td>Raport z Badania nr 1</td></tr>
+</table>
+
+<h2><span class="n">10</span>Zespół</h2>
+<table>
+  <tr><th style="width:28%">Rola</th><th>Odpowiedzialność</th><th style="width:22%">Szacowany nakład</th></tr>
+  <tr><td>Kierownik badania</td><td>Protokół, harmonogram, decyzje, raport</td><td>do ustalenia</td></tr>
+  <tr><td>Operator i inżynier danych</td><td>Montaż, kalibracja, teleoperacja, kontrola jakości danych</td><td>do ustalenia</td></tr>
+  <tr><td>Inżynier ML</td><td>Trening, ewaluacja, analiza porażek</td><td>do ustalenia</td></tr>
+  <tr><td>Mistrz tapicer</td><td>Demonstracje w części A, kryteria jakości, ocena wyników</td><td>ok. 2 dni robocze</td></tr>
+</table>
+<p class="small">Jedna osoba może łączyć pierwsze trzy role. Nakład pracy nie został oszacowany, bo zależy od doświadczenia zespołu z LeRobot.</p>
+
+<h2><span class="n">11</span>Budżet</h2>
+<p>Kursy NBP z 10.11.2026: 1 EUR = 4,3895 zł. Kwoty bez potwierdzonego VAT i dostawy.</p>
+<table>
+  <tr><th>Pozycja</th><th style="width:22%">Zakres</th><th style="width:34%">Podstawa</th></tr>
+  <tr><td>Para ramion leader–follower SO-101</td><td>1 550–2 650 zł</td><td>Oferty sklepów z 11.11.2026</td></tr>
+  <tr><td>Części drukowane 3D</td><td>0–400 zł</td><td>Założenie, bez wyceny</td></tr>
+  <tr><td>Kamery, statywy, oświetlenie</td><td>400–1 200 zł</td><td>Kompendium</td></tr>
+  <tr><td>Stanowisko i rezerwa</td><td>300–2 300 zł</td><td>Kompendium</td></tr>
+  <tr><td>GPU w chmurze</td><td>0–300 zł</td><td>Założenie, bez wyceny</td></tr>
+  <tr><td>Materiały tapicerskie: tkaniny, pianka, panele, rzepy</td><td>150–400 zł</td><td>Założenie, bez wyceny</td></tr>
+  <tr><td><b>Razem gotówka</b></td><td><b>2 400–7 250 zł</b></td><td></td></tr>
+  <tr><td>Wynagrodzenie tapicera</td><td>do ustalenia</td><td>Brak oferty</td></tr>
+  <tr><td>Umowa o prawach do nagrań</td><td>do ustalenia</td><td>W ramach doradztwa prawnego</td></tr>
+  <tr><td>Praca zespołu</td><td>nie wyceniono</td><td></td></tr>
+</table>
+
+<h2><span class="n">12</span>Bezpieczeństwo, prawo, etyka</h2>
+<ul>
+  <li><b>Stanowisko:</b> bez ostrych i gorących narzędzi. Robot pracuje wyłącznie pod nadzorem, z wyłącznikiem zasilania w zasięgu ręki. Przed startem krótka pisemna ocena ryzyka.</li>
+  <li><b>Umowa z tapicerem:</b> zakres wykorzystania nagrań i wiedzy, wynagrodzenie, zgoda na wizerunek i głos, prawo do wycofania zgody. Podpisana przed pierwszym nagraniem.</li>
+  <li><b>Dane osobowe:</b> twarz i głos to dane osobowe. Kadr ograniczony do rąk i stanowiska, tam gdzie to możliwe. Określony czas przechowywania surowych nagrań.</li>
+  <li><b>Rzetelność:</b> progi ustalone przed badaniem, raport zawiera także porażki, żadnych deklaracji gotowości produkcyjnej.</li>
+  <li><b>Etapy 3–6:</b> praca z narzędziem mocującym i robotem przemysłowym wymaga osobnej analizy BHP i wymagań dla maszyn z udziałem specjalisty. To poza zakresem Badania nr 1.</li>
+</ul>
+
+<h2><span class="n">13</span>Ryzyka badania</h2>
+<table>
+  <tr><th style="width:34%">Ryzyko</th><th style="width:12%">Waga</th><th>Ograniczenie</th></tr>
+  <tr><td>Chwytak nie trzyma tkaniny</td><td>Wysoka</td><td>Test trzech nakładek na szczęki w tygodniu 1, zanim ruszą nagrania</td></tr>
+  <tr><td>Jedno ramię nie wystarcza do Z2 i Z3</td><td>Wysoka</td><td>Uchwyt pasywny trzymający przeciwległą krawędź. W razie porażki decyzja PIVOT</td></tr>
+  <tr><td>Niespójne demonstracje</td><td>Średnia</td><td>Jeden operator, pisemna instrukcja wykonania, przegląd każdej sesji</td></tr>
+  <tr><td>Zmiana oświetlenia lub położenia kamer</td><td>Średnia</td><td>Sztywne mocowania, osłona od światła dziennego, zdjęcie kontrolne przed sesją</td></tr>
+  <tr><td>Brak dostępu do tapicera</td><td>Średnia</td><td>Umowa i terminy przed zamówieniem sprzętu</td></tr>
+  <tr><td>Wynik nieprzenaszalny na robota przemysłowego</td><td>Wysoka</td><td>Traktować badanie jako naukę procesu i danych, nie jako prototyp produktu</td></tr>
+  <tr><td>Brak odbiorcy wyniku</td><td>Wysoka</td><td>5 rozmów z producentami mebli tapicerowanych w trakcie badania</td></tr>
+</table>
+
+<h2><span class="n">14</span>Rezultaty</h2>
+<ol>
+  <li>Raport z Badania nr 1: wyniki, przedziały ufności, katalog porażek, decyzja.</li>
+  <li>Zbiór danych v1 z metadanymi i dokumentacją.</li>
+  <li>Ontologia etapów tapicerowania i mapa automatyzowalności.</li>
+  <li>Wyliczenie kosztu jednej zaakceptowanej demonstracji.</li>
+  <li>Nagranie pokazowe: 3 udane i 3 nieudane próby każdego zadania.</li>
+  <li>Projekt protokołu etapu 2, jeśli decyzja brzmi GO.</li>
+</ol>
+
+<h2><span class="n">15</span>Zatwierdzenie</h2>
+<table class="sign">
+  <tr><th style="width:30%">Rola</th><th>Imię i nazwisko</th><th style="width:20%">Data</th><th style="width:24%">Podpis</th></tr>
+  <tr><td>Kierownik badania</td><td></td><td></td><td></td></tr>
+  <tr><td>Właściciel budżetu</td><td></td><td></td><td></td></tr>
+  <tr><td>Mistrz tapicer (konsultacja kryteriów)</td><td></td><td></td><td></td></tr>
+</table>
+
+<h2><span class="n">16</span>Źródła</h2>
+<ul class="small">
+  <li>Robotics and Automation News, 05.06.2026, cela Dvolu z robotem Fanuc: <a href="https://roboticsandautomationnews.com/2026/06/05/fanuc-powered-robotic-cell-automates-one-of-furniture-manufacturings-toughest-jobs/102312/">roboticsandautomationnews.com/2026/06/05/fanuc-powered-robotic-cell…</a></li>
+  <li>SSFold, składanie tkanin z demonstracji człowieka: <a href="https://arxiv.org/html/2411.02608v1">arxiv.org/html/2411.02608v1</a></li>
+  <li>Składanie odzieży, uczenie przez naśladowanie w pętli zamkniętej: <a href="https://arxiv.org/abs/2505.09109v4">arxiv.org/abs/2505.09109v4</a></li>
+  <li>ALOHA Unleashed: <a href="https://arxiv.org/pdf/2410.13126v1">arxiv.org/pdf/2410.13126v1</a></li>
+  <li>UC Berkeley, raport EECS-2022-153: <a href="https://www2.eecs.berkeley.edu/Pubs/TechRpts/2022/EECS-2022-153.html">www2.eecs.berkeley.edu/Pubs/TechRpts/2022/EECS-2022-153.html</a></li>
+  <li>Hugging Face LeRobot: <a href="https://huggingface.co/lerobot">huggingface.co/lerobot</a></li>
+  <li>Fernhunt Baltic AI, Kompendium strategiczne 1.0, 11.11.2026.</li>
+</ul>
+<p class="small">Dokument jest protokołem badawczym przygotowanym z pomocą asystenta AI. Nie jest opinią prawną, oceną BHP ani ofertą. Dane rynkowe pochodzą ze źródeł wtórnych i wymagają potwierdzenia przed decyzjami finansowymi.</p>
+
+</body>
+</html>
